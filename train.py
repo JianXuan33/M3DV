@@ -50,9 +50,9 @@ def main(batch_sizes, crop_size, random_move, learning_rate,
                                     loss_weights={"clf": 1., "seg": segmentation_task_ratio},
                                     weight_decay=weight_decay)
 
-    checkpointer = ModelCheckpoint(filepath='tmp/%s/weights.{epoch:02d}.h5' % save_folder, verbose=1,
-                                   period=1, save_weights_only=True)
-    best_keeper = ModelCheckpoint(filepath='tmp/%s/best.h5' % save_folder, verbose=1, save_weights_only=True,
+    checkpointer = ModelCheckpoint(filepath='tmp/%s/weights_test.{epoch:02d}.h5' % save_folder, verbose=1,
+                                   period=1, save_weights_only=False)
+    best_keeper = ModelCheckpoint(filepath='tmp/%s/best_test.h5' % save_folder, verbose=1, save_weights_only=False,
                                   monitor='val_clf_acc', save_best_only=True, period=1, mode='max')
     csv_logger = CSVLogger('tmp/%s/training.csv' % save_folder)
     tensorboard = TensorBoard(log_dir='tmp/%s/logs/' % save_folder)
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     main(batch_sizes=[8, 8],
          crop_size=[32, 32, 32],
          random_move=3,
-         learning_rate=1.e-4,
+         learning_rate=2.e-4,
          segmentation_task_ratio=0.2,
          weight_decay=0.,
          save_folder='test',
