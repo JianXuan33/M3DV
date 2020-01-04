@@ -54,11 +54,11 @@ def main():
         preds = test_model.predict(np.array([test_dataset[idx][0]]))
         a,b = preds[0][0]
         list.append(b)
-    with open('submission.csv','r') as f:
+    with open('Submission.csv','r') as f:
         reader=csv.reader(f)
         column1 = [row[0] for row in reader]
         f.close()
-    with open("submission.csv","w") as csvfile:
+    with open("Submission.csv","w") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Id','Predicted'])
         for k in range(len(column1)):
